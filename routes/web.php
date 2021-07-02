@@ -20,7 +20,19 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/', [FlorController::class, 'flores']);
+Route::redirect('/', '/admin/flores');
+
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::get('flores', [FlorController::class, 'flores'])->name('flores.listar');
+    Route::get('flores/salvar', [FlorController::class, 'formAdicionar'])->name('flores.form');
+    Route::post('flores/salvar', [FlorController::class, 'adicionar'])->name('flores.adicionar');
+    Route::delete('flores/{id}', [FlorController::class, 'deletar'])->name('flores.deletar');
+    Route::get('flores/{id}',  [FlorController::class, 'formEditar'])->name('flores.formEditar');
+    Route::put('flores/{id}',  [FlorController::class, 'editar'])->name('flores.editar');
+});
 
 Route::get('/sobre', function () {
     return '<h1>Sobre<h1>';

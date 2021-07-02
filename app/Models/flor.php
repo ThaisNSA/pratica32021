@@ -10,6 +10,7 @@ class flor extends Model
     use HasFactory;
 
     protected $table = "flores";
+    protected $fillable = ['nome', 'cor', 'preco'];
 
     // protected $primaryKey = '';
     // public $timestamps = false;
