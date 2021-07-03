@@ -16,7 +16,7 @@
     <input type="text" name="nome" id="nome" value="{{old('nome', $flor->nome ?? '')}}"/>
     <label for="nome">Nome</label>
     @error('nome')
-        <span class="red-text text-acent-3"><small>{{$message}}</small></span>
+        <span class="pink-text text-acent-4"><small>{{$message}}</small></span>
     @enderror
 </div>
 
@@ -24,15 +24,15 @@
     <input type="text" name="cor" id="cor" value="{{old('cor', $flor->cor ?? '')}}"/>
     <label for="cor">Cor</label>
     @error('cor')
-    <span class="red-text text-acent-3"><small>{{$message}}</small></span>
+    <span class="pink-text text-acent-4"><small>{{$message}}</small></span>
 @enderror
 </div>
 
 <div class="input-field">
     <input type="text" name="preco" id="preco" value="{{old('preco', $flor->preco ?? '')}}" />
     <label for="preco">Preço(R$)</label>
-    @error('preço')
-    <span class="red-text text-acent-3"><small>{{$message}}</small></span>
+    @error('preco')
+    <span class="pink-text text-acent-4"><small>{{$message}}</small></span>
 @enderror
 </div>
 
