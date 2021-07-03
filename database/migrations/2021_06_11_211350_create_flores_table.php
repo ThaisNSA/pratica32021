@@ -16,8 +16,8 @@ class CreateFloresTable extends Migration
         Schema::create('flores', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 100);
-            $table->string('cor');
-            $table->string('preco');
+            $table->text('cor');
+            $table->decimal('preco');
             $table->timestamps();
         });
     }

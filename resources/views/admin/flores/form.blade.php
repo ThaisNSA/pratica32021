@@ -29,9 +29,9 @@
 </div>
 
 <div class="input-field">
-    <input type="text" name="preco" id="preco" value="{{old('preco', $flor->preco ?? '')}}"/>
+    <input type="text" name="preco" id="preco" value="{{old('preco', $flor->preco ?? '')}}" />
     <label for="preco">Preço(R$)</label>
-    @error('preco')
+    @error('preço')
     <span class="red-text text-acent-3"><small>{{$message}}</small></span>
 @enderror
 </div>
