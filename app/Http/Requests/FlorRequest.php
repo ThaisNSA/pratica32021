@@ -26,7 +26,7 @@ class FlorRequest extends FormRequest
         return [
             'nome' => 'bail|required|min:4|max:100',
             'cor' => 'bail|required|min:4|max:50',
-            'preco' => 'bail|required|min:4|max:50'
+            'preco' => 'bail|required|min:1|max:50'
         ];
     }
 }
