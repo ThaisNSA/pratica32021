@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\FlorRequest;
 use App\Models\Flor;
+use App\Models\Finalidade;
+use App\Models\Tipo;
+use App\Models\Quantidade;
+use App\Models\Tamanho;
+use Illuminate\Support\Facades\DB;
 
-class FlorController extends Controller
+class QuantidadeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +20,7 @@ class FlorController extends Controller
      */
     public function index()
     {
-        $subtitulo = 'Lista de Flores';
-        $flores = Flor::All();
-        return view('admin.flores.index', compact('subtitulo', 'flores'));
+        return view('admin.quantidades.index');
     }
 
     /**
@@ -28,8 +30,12 @@ class FlorController extends Controller
      */
     public function create()
     {
-        $action = route('admin.flores.store');
-        return view('admin.flores.form', compact('action'));
+        $flores = Flor::all();
+        $tipos = Tipo::all();
+        $finalidades = Finalidade::all();
+        $tamanhos = Tamanho::all();
+        $action = route('admin.quantidades.store');
+        return view('admin.quantidades.form', compact('action', 'flores', 'tipos', 'finalidades', 'tamanhos'));
     }
 
     /**
@@ -38,11 +44,23 @@ class FlorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FlorRequest $request)
+    public function store(Request $request)
     {
+        DB::beginTransaction();
+
+        $quantidade = Quantidade::create($request->all());
+        $quantidade->endereco()->create($request->all());
+
+        if ($request->has('tamanhos')) {
+
+            $quantidade->tamanhos()->attach($request->tamanhos);
+        }
+
+        DB::Commit();
+
         Flor::create($request->all());
         $request->session()->flash('sucesso', "Dados incluidos com sucesso!");
-        return redirect()->route('admin.flores.index');
+        return redirect()->route('admin.quantidade.index');
     }
 
     /**
@@ -51,10 +69,10 @@ class FlorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($id)
-    //{
-    //
-    // }
+    public function show($id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -64,9 +82,7 @@ class FlorController extends Controller
      */
     public function edit($id)
     {
-        $flor = Flor::find($id);
-        $action = route('admin.flores.update', $flor->id);
-        return view('admin.flores.form', compact('flor', 'action'));
+        //
     }
 
     /**
@@ -76,13 +92,9 @@ class FlorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FlorRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $flor = Flor::find($id);
-        $flor->update($request->all());
-
-        $request->session()->flash('sucesso', "Dados alterados com sucesso!");
-        return redirect()->route('admin.flores.index');
+        //
     }
 
     /**
@@ -91,10 +103,8 @@ class FlorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        Flor::destroy($id);
-        $request->session()->flash('sucesso', "Dados excluídos com sucesso!");
-        return redirect()->route('admin.flores.index');
+        //
     }
 }

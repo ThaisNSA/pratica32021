@@ -17,11 +17,11 @@
                 <a href="index" class="brand-logo">Cantinho das Flores</a>
                 <ul class="right">
                     <li>
-                        <a href="#">Sugestões</a>
+                        <a href="{{route('admin.quantidades.index')}}">Modelos</a>
                     </li>
 
                     <li>
-                        <a href="#">Sobre</a>
+                        <a href="{{route('admin.flores.index')}}">Encomendas</a>
                     </li>
                 </ul>
             </div>
@@ -41,9 +41,13 @@
     @if (session('sucesso'))
 
             M.toast({html:"{{session('sucesso')}}"});
-
-
     @endif
+
+    document.addEventListener('DOMContentLoaded', function (){
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+
 </script>
 </body>
 </html>

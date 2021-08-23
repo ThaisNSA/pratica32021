@@ -26,13 +26,13 @@
 
                         <td class="right-align">
 
-                            <a href="{{route('admin.flores.formEditar', $flor->id)}}">
+                            <a href="{{route('admin.flores.edit', $flor->id)}}">
                             <span>
                                 <i class="material-icons pink-text text-lighten-3">edit</i>
                             </span>
                         </a>
 
-                            <form action="{{route('admin.flores.deletar', $flor->id)}}" method="POST" style="display: inline;">
+                            <form action="{{route('admin.flores.destroy', $flor->id)}}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
 
@@ -58,7 +58,7 @@
         </table>
 
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large waves-effect waves-light" href="{{route('admin.flores.form')}}">
+            <a class="btn-floating btn-large waves-effect waves-light" href="{{route('admin.flores.create')}}">
                 <i class="large material-icons">add</i>
             </a>
         </div>

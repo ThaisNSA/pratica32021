@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFloresTable extends Migration
+class CreateQuantidadeProximidadeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateFloresTable extends Migration
      */
     public function up()
     {
-        Schema::create('flores', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome', 100)->nullable();
-            $table->text('cor');
-            $table->decimal('preco', 12, 2);
+        Schema::create('quantidade_proximidade', function (Blueprint $table) {
+
+            $table->foreignId('quantidade_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tamanho_id')->constrained()->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateFloresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('flores');
+        Schema::dropIfExists('quantidade_proximidade');
     }
 }
